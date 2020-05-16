@@ -29,10 +29,9 @@ red,green,blue = first_pixel
 def nparray_to_image(array):
     return Image.fromarray(np.uint8(array))
 
-# nparray_to_image(tulip_array).show()
+nparray_to_image(image_array).show()
 
 ###generating modified np arrays
-
 def modified_image_array(array, modification):
     output = []
     for row in array:
@@ -45,20 +44,20 @@ def modified_image_array(array, modification):
 def redify(pixel):
     red,green,blue = pixel
     new_red = red + 40
-    if(new_red > 255):
+    if new_red > 255:
         new_red = 255
     return [new_red,green,blue]
 
 def greenify(pixel):
     red,green,blue = pixel
     new_green = green + 40
-    if(new_green > 255):
+    if new_green > 255:
         new_green = 255
     return [red,new_green,blue]
 
 def blueify(pixel):
     red,green,blue = pixel
-    new_red = red + 40
+    new_red = red + 60
     if(new_red > 255):
         new_red = 255
     return [new_red,green,blue]
@@ -70,12 +69,7 @@ def turn_white_things_yellow(pixel):
         return pixel
 
 new_image_array = modified_image_array(np.array(cropped_images[0]),turn_white_things_yellow)
-# nparray_to_image(new_image_array).show()
-
-## import new image and blend images
-blended = Image.blend(cropped_images[1],cropped_images[2],.8)
-# blended.show()
-# blended.
+nparray_to_image(new_image_array).show()
     
 ### perform logic based off of pixel values
 image_arrays = [np.array(image) for image in cropped_images]
@@ -94,8 +88,10 @@ for row in range(len(image_one_array)):
 
 new_image = nparray_to_image(new_image_array)
 
-# new_image.show()
-new_image.save(f"./output/spaceNeedleAgainstTheSound.jpg")
+new_image.show()
+
+### Save images to file
+new_image.save(f"./output/new_image.jpg")
 
         
 
